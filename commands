@@ -1,0 +1,10 @@
+Compile DPDK - 
+make install T=x86_64-native-linuxapp-gcc RTE_ARCH=x86_64 RTE_MACHINE=native RTE_EXEC_ENV=linuxapp RTE_TOOLCHAIN=gcc
+sudo apt-get install libnuma-dev
+
+
+Compile sample application :
+export RTE_SDK=/home/dpdk/workspace/dpdk/dpdk-stable-18.11.1
+
+export RTE_TARGET=x86_64-native-linuxapp-gcc
+

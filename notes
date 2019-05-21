@@ -1,0 +1,18 @@
+* Huge pages: It's better to allocate huge pages at the bootup time, so that pages can be allocated before the memory
+	fragmentation occurs.
+* Size of huge pages : Depends on the cpu flags. On intel, if "pse" is enabled then 2MB, if "pdpe" is enabled then 1GB
+* Book-keeping information required for a page allocation is 1KB.
+* NUMA : solves the problem of concurrent memory access in an SMP. In an where there is only one system bus, there is contention
+	for the bandwidth between multiple processors which might result in starvation of one or more processors in case a single
+	processor in using the memory at a given point in time. NUMA based CPUs solve this problem for SMPs but the NON-SMPs solve
+	this problem by using the multiple memory-channel architecture.
+				 --------------------------------------
+	NUMA based performance improvments depends heavily in the nature or running tasks.
+* Multiple-channel multiple arch : It increases the channels between memory and the memory-controller
+
+Links :
+1. meaning of cpu flags : https://unix.stackexchange.com/questions/43539/what-do-the-flags-in-proc-cpuinfo-mean
+https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/arch/x86/include/asm/cpufeatures.h
+
+Challenges :
+* Improve memory speed to catch up with the processing speed.
