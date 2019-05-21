@@ -36,6 +36,7 @@ build:
 clean:
 	rm -f build/$(APP) build/$(APP)-static build/$(APP)-shared
 	rmdir --ignore-fail-on-non-empty build
+	rm -f build/app/$(APP)
 
 else
 

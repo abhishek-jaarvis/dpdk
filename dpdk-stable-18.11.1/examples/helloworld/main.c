@@ -16,11 +16,13 @@
 #include <rte_debug.h>
 
 static int
-lcore_hello(__attribute__((unused)) void *arg)
+lcore_hello(void *arg)
 {
 	unsigned lcore_id;
+	char *ptr = arg;
 	lcore_id = rte_lcore_id();
 	printf("hello from core %u\n", lcore_id);
+	printf("hello from %s\n", ptr);
 	return 0;
 }
 
@@ -29,18 +31,21 @@ main(int argc, char **argv)
 {
 	int ret;
 	unsigned lcore_id;
+	char caller[16];
 
 	ret = rte_eal_init(argc, argv);
 	if (ret < 0)
 		rte_panic("Cannot init EAL\n");
 
+	memset(caller, 0, sizeof(caller));
 	/* call lcore_hello() on every slave lcore */
 	RTE_LCORE_FOREACH_SLAVE(lcore_id) {
-		rte_eal_remote_launch(lcore_hello, NULL, lcore_id);
+		snprintf(caller, sizeof(caller), "slave-id %d", lcore_id);
+		rte_eal_remote_launch(lcore_hello, caller, lcore_id);
 	}
 
 	/* call it on master lcore too */
-	lcore_hello(NULL);
+	lcore_hello("Master");
 
 	rte_eal_mp_wait_lcore();
 	return 0;

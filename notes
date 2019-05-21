@@ -16,3 +16,10 @@ https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/arch/x86/i
 
 Challenges :
 * Improve memory speed to catch up with the processing speed.
+
+
+DPDK specific :
+==============
+* Instead of igb_uio we can also use the uio_pci_generic which is already provided by the kernel. Only in case when devices dont
+	have support for legacy interrupts (like virtual function devices)
+* If UEFI is enabled, then we need to use vfio instead of uio or uio_pci_generic

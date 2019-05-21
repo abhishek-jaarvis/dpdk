@@ -8,3 +8,5 @@ export RTE_SDK=/home/dpdk/workspace/dpdk/dpdk-stable-18.11.1
 
 export RTE_TARGET=x86_64-native-linuxapp-gcc
 
+# Run the application as sudo
+sudo ./helloworld -c 0x2 -n 1
